@@ -4,25 +4,26 @@
  */
 package proyectoentrega_1;
 
-/**
- *
- * @author PRIVATE
- */
+//Creacion de la clase producto
 public class Producto {
     
-    int id;
-    String nombreProducto;
-    Double precioPorUnidad;
-
+    //Atributos de la clase Producto: id, nombreProducto, precioPorUnidad
+    private int id;
+    private String nombreProducto;
+    private Double precioPorUnidad;
+    
+    //Constructor vacio
     public Producto() {
     }
-
+    
+    //Constructor con todos los atributos
     public Producto(int id, String nombreProducto, Double precioPorUnidad) {
         this.id = id;
         this.nombreProducto = nombreProducto;
         this.precioPorUnidad = precioPorUnidad;
     }
-
+    
+    //Metodos Get y Set de los 3 atributos de la clase
     public int getId() {
         return id;
     }
@@ -46,10 +47,11 @@ public class Producto {
     public void setPrecioPorUnidad(Double precioPorUnidad) {
         this.precioPorUnidad = precioPorUnidad;
     }
-
+    
+    //Metodo para impresion ToString con el formato que se requiere
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", nombreProducto=" + nombreProducto + ", precioPorUnidad=" + precioPorUnidad + '}';
+        return "Producto: "+id+";"+nombreProducto+";"+precioPorUnidad;
     }
     
 }

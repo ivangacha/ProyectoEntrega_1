@@ -4,29 +4,83 @@
  */
 package proyectoentrega_1;
 
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  *
  * @author PRIVATE
  */
 public class ProyectoEntrega_1 {
-
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
         
-        Vendedor vendedor1 = new Vendedor();
-        vendedor1.setTipoDocumento("cedula");
-        vendedor1.setNumeroDocumento("1013607757");
-        vendedor1.setNombres("Ivan Javier");
-        vendedor1.setApellidos("Gachancipa Manrique");
+        //Se crea la variable scanner para obtener los datos ingresados por consola
+        Scanner scanner = new Scanner(System.in);
         
-        Vendedor vendedor2 = new Vendedor("cedula", "1067813753", "Jessica Julieth", "Narvaez Cadena");
+        //Creacion de una lista para ingresar la informacion de los vendedores
+        List<Vendedor> listaVendedores = new ArrayList<>();
         
-        System.out.println("Vendedor 1: "+vendedor1.getTipoDocumento()+";"+vendedor1.getNumeroDocumento()+";"+vendedor1.getNombres()+";"+vendedor1.getApellidos());
-        System.out.println("Vendedor 2: "+vendedor2.getTipoDocumento()+";"+vendedor2.getNumeroDocumento()+";"+vendedor2.getNombres()+";"+vendedor2.getApellidos());
+        //Variable que controla la condicion del while
+        boolean bandera = true;
         
-        System.out.println(vendedor1.toString());
+        //Ciclo que controla el ingreso de los vendedores
+        while(bandera){
+            
+            //Se utiliza el metodo agregarVendedor
+            agregarVendedor(listaVendedores, scanner);
+            
+            //Se pregunta al usuario si desea ingresar de otro vendedor, de lo contrario finaliza el ciclo
+            System.out.println("Desea ingresar informacion de otro vendedor (si/no): ");
+            String respuesta = scanner.nextLine();
+            bandera = respuesta.equalsIgnoreCase("si");
+            
+        }
+        
+        listarVendedores(listaVendedores);
+        
+    }
+    
+    //Metodo agregarVendedor que permite ingresar la informacion de cada vendedor
+    public static void agregarVendedor(List<Vendedor> listaVendedores, Scanner scanner){
+        
+        System.out.println("Ingrese la informacion del vendedor:");
+        
+        //Se pide por consola ingresar el tipo del documento y se almacena en la variable tipoDocumento
+        System.out.println("Tipo de documento (ti/cc/te): ");
+        String tipoDocumento = scanner.nextLine();
+        
+        //Se pide por consola ingresar el numero del documento y se almacena en la variable numeroDocumento
+        System.out.println("Numero de documento: ");
+        String numeroDocumento = scanner.nextLine();
+        
+        //Se pide por consola ingresar los nombres y se almacenan en la variable nombres
+        System.out.println("Nombres: ");
+        String nombres = scanner.nextLine();
+        
+        //Se pide por consola ingresar los apellidos y se almacenan en la variable apellidos
+        System.out.println("Apellidos: ");
+        String apellidos = scanner.nextLine();
+        
+        //Se crea un objeto de tipo vendedor
+        Vendedor vendedor = new Vendedor(tipoDocumento, numeroDocumento, nombres, apellidos);
+        
+        //El objeto creado se agrega a la lista vendedores
+        listaVendedores.add(vendedor);
+        
+    }
+    
+    //Metodo listarVendedores que permite imprimir la informacion de los vededores
+    public static void listarVendedores(List<Vendedor> listaVendedores){
+        
+        System.out.println("Lista con la informacion de todos los vendedores: ");
+        
+        //Ciclo for-each que recorre la lista de los vendedores con toda la informacion del objeto
+        for (Vendedor vendedor : listaVendedores) {
+            //Se utiliza el metodo mostrarInformacion de la clase vendedor para mostrar la impresion de los datos de los vendedores
+            vendedor.mostrarInformacion();
+        }
         
     }
     

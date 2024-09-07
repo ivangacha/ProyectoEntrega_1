@@ -4,27 +4,28 @@
  */
 package proyectoentrega_1;
 
-/**
- *
- * @author PRIVATE
- */
+//Creacion de la clase producto
 public class Vendedor {
     
-    String tipoDocumento;
-    String numeroDocumento;
-    String nombres;
-    String apellidos;
-
+    //Atributos de la clase Vendedor: tipoDocumento, numeroDocumento, nombres, apellidos
+    private String tipoDocumento;
+    private String numeroDocumento;
+    private String nombres;
+    private String apellidos;
+    
+    //Constructor vacio
     public Vendedor() {
     }
-
+    
+    //Constructor con todos los atributos
     public Vendedor(String tipoDocumento, String numeroDocumento, String nombres, String apellidos) {
         this.tipoDocumento = tipoDocumento;
         this.numeroDocumento = numeroDocumento;
         this.nombres = nombres;
         this.apellidos = apellidos;
     }
-
+    
+    //Metodos Get y Set de los 4 atributos de la clase
     public String getTipoDocumento() {
         return tipoDocumento;
     }
@@ -56,10 +57,12 @@ public class Vendedor {
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
-
-    @Override
-    public String toString() {
-        return "Vendedor{" + "tipoDocumento=" + tipoDocumento + ", numeroDocumento=" + numeroDocumento + ", nombres=" + nombres + ", apellidos=" + apellidos + '}';
+    
+    //Metodo para la impresion con el formato que se requiere
+    public void mostrarInformacion(){
+        
+        System.out.println("Vendedor: "+tipoDocumento+";"+numeroDocumento+";"+nombres+";"+apellidos);
+    
     }
     
 }
