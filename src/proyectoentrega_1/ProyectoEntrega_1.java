@@ -4,6 +4,8 @@
  */
 package proyectoentrega_1;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class ProyectoEntrega_1 {
         //Ciclo que controla el ingreso de los vendedores
         while(bandera){
             
-            //Se utiliza el metodo agregarVendedor
+            //Llamada al metodo agregarVendedor para ingresar la informacion de los vendedores
             agregarVendedor(listaVendedores, scanner);
             
             //Se pregunta al usuario si desea ingresar de otro vendedor, de lo contrario finaliza el ciclo
@@ -38,7 +40,11 @@ public class ProyectoEntrega_1 {
             
         }
         
+        //Llamada al metodo listarVendedores para imprimir la informacion de los vendedores
         listarVendedores(listaVendedores);
+        
+        //Llamada al metodo generarVendedoresCSV para generar el archivo CSV con la información de los vendedores
+        generarVendedoresCSV(listaVendedores, "vendedores.csv");
         
     }
     
@@ -82,6 +88,30 @@ public class ProyectoEntrega_1 {
             vendedor.mostrarInformacion();
         }
         
+    }
+    
+    // Metodo para generar el archivo CSV con la informacion de los vendedores
+    public static void generarVendedoresCSV(List<Vendedor> vendedores, String archivo) {
+        try (FileWriter writer = new FileWriter(archivo)) {
+            // Escribir la cabecera del CSV
+            writer.append("TipoDocumento,NumeroDocumento,Nombres,Apellidos\n");
+
+            // Escribir la información de cada vendedor
+            for (Vendedor vendedor : vendedores) {
+                writer.append(vendedor.getTipoDocumento())
+                      .append(',')
+                      .append(vendedor.getNumeroDocumento())
+                      .append(',')
+                      .append(vendedor.getNombres())
+                      .append(',')
+                      .append(vendedor.getApellidos())
+                      .append('\n');
+            }
+
+            System.out.println("Archivo CSV de vendedores generado exitosamente.");
+        } catch (IOException e) {
+            System.out.println("Error al generar el archivo CSV de vendedores: " + e.getMessage());
+        }
     }
     
 }
