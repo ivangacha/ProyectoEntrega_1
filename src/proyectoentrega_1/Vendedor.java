@@ -61,7 +61,7 @@ public class Vendedor {
     //Metodo para la impresion con el formato que se requiere
     public void mostrarInformacion(){
         
-        System.out.println("Vendedor: "+tipoDocumento+";"+numeroDocumento+";"+nombres+";"+apellidos);
+        System.out.println(tipoDocumento+";"+numeroDocumento+";"+nombres+";"+apellidos);
     
     }
     

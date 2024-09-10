@@ -48,10 +48,11 @@ public class Producto {
         this.precioPorUnidad = precioPorUnidad;
     }
     
-    //Metodo para impresion ToString con el formato que se requiere
-    @Override
-    public String toString() {
-        return "Producto: "+id+";"+nombreProducto+";"+precioPorUnidad;
+    //Metodo para la impresion con el formato que se requiere
+    public void mostrarInformacion(){
+        
+        System.out.println(id+";"+nombreProducto+";"+precioPorUnidad);
+    
     }
     
 }
