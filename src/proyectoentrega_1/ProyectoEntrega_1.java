@@ -64,21 +64,8 @@ public class ProyectoEntrega_1 {
                 case 1:
                     System.out.println("Has escogido la opcion 1.");
                     
-                    //Variable que controla la condicion del while
-                    boolean bandera = true;
-        
-                    //Ciclo que controla el ingreso de los vendedores
-                    while(bandera){
-
-                        //Llamada al metodo agregarVendedor para ingresar la informacion de los vendedores
-                        agregarVendedor(listaVendedores, scanner);
-
-                        //Se pregunta al usuario si desea ingresar de otro vendedor, de lo contrario finaliza el ciclo
-                        System.out.println("Desea ingresar informacion de otro vendedor (si/no): ");
-                        String respuesta = scanner.nextLine();
-                        bandera = respuesta.equalsIgnoreCase("si");
-
-                    }
+                    //Llamada al metodo agregarVendedor para ingresar la informacion de los vendedores
+                    agregarVendedor(listaVendedores, scanner);
                     
                     pausaYLimpiarConsola();
                     break;
@@ -101,20 +88,8 @@ public class ProyectoEntrega_1 {
                 case 4:
                     System.out.println("Has escogido la opcion 4.");
                     
-                    bandera = true;
-        
-                    //Ciclo que controla el ingreso de los productos
-                    while(bandera){
-
-                        //Llamada al metodo agregarProducto para ingresar la informacion de los productos
-                        agregarProducto(listaProductos, scanner);
-
-                        //Se pregunta al usuario si desea ingresar de otro producto, de lo contrario finaliza el ciclo
-                        System.out.println("Desea ingresar informacion de otro producto (si/no): ");
-                        String respuesta = scanner.nextLine();
-                        bandera = respuesta.equalsIgnoreCase("si");
-
-                    }
+                    //Llamada al metodo agregarProducto para ingresar la informacion de los productos
+                    agregarProducto(listaProductos, scanner);
                     
                     pausaYLimpiarConsola();
                     break;
@@ -163,34 +138,76 @@ public class ProyectoEntrega_1 {
     
     //Metodo agregarVendedor que permite ingresar la informacion de cada vendedor
     public static void agregarVendedor(List<Vendedor> listaVendedores, Scanner scanner){
-        
-        System.out.println("Ingrese la informacion del vendedor:");
-        
-        //Se pide por consola ingresar el tipo del documento y se almacena en la variable tipoDocumento
-        System.out.println("Tipo de documento (ti/cc/te): ");
-        String tipoDocumento = scanner.nextLine();
-        
-        //Se pide por consola ingresar el numero del documento y se almacena en la variable numeroDocumento
-        System.out.println("Numero de documento: ");
-        String numeroDocumento = scanner.nextLine();
-        
-        //Se pide por consola ingresar los nombres y se almacenan en la variable nombres
-        System.out.println("Nombres: ");
-        String nombres = scanner.nextLine();
-        
-        //Se pide por consola ingresar los apellidos y se almacenan en la variable apellidos
-        System.out.println("Apellidos: ");
-        String apellidos = scanner.nextLine();
-        
-        //Se crea un objeto de tipo vendedor
-        Vendedor vendedor = new Vendedor(tipoDocumento, numeroDocumento, nombres, apellidos);
-        
-        //El objeto creado se agrega a la lista vendedores
-        listaVendedores.add(vendedor);
-        
+    
+        //Variable que controla la condicion del while
+        boolean bandera = true;
+
+        //Ciclo que controla el ingreso de los vendedores
+        while(bandera){
+
+            System.out.println("Ingrese la informacion del vendedor:");
+
+            //Se pide por consola ingresar el tipo del documento y se almacena en la variable tipoDocumento
+            System.out.println("Tipo de documento (ti/cc/te): ");
+            String tipoDocumento = scanner.nextLine();
+
+            //Variable que controla la condicion del while
+            boolean validador = true;
+            //Variable numeroDocumento que almacenara en numero de documento del vendedor
+            String numeroDocumento = "";
+
+            //Ciclo que controla que no se ingrese una cedula repetida
+            while(validador){
+
+                //Se pide por consola ingresar el numero del documento y se almacena en la variable numeroDocumento
+                System.out.println("Numero de documento: ");
+                numeroDocumento = scanner.nextLine();
+
+                //Variable para saber si el documento ya existe
+                boolean documentoRepetido = false;
+                //Ciclo para verificar si ya existe un vendedor con el mismo numero de documento
+                for (Vendedor v : listaVendedores){
+                    if (v.getNumeroDocumento().equals(numeroDocumento)){
+                        System.out.println("Error: Ya existe un vendedor con ese numero de documento.");
+                        documentoRepetido = true;
+                        //Sale del ciclo si encuentra un documento repetido
+                        break;
+                    }
+                }
+
+                if (!documentoRepetido){
+
+                    //Sale del ciclo si el documento ingresado no esta repetido en la lista
+                    validador = false;
+
+                }
+
+            }
+
+            //Se pide por consola ingresar los nombres y se almacenan en la variable nombres
+            System.out.println("Nombres: ");
+            String nombres = scanner.nextLine();
+
+            //Se pide por consola ingresar los apellidos y se almacenan en la variable apellidos
+            System.out.println("Apellidos: ");
+            String apellidos = scanner.nextLine();
+
+            //Se crea un objeto de tipo vendedor
+            Vendedor vendedor = new Vendedor(tipoDocumento, numeroDocumento, nombres, apellidos);
+
+            //El objeto creado se agrega a la lista vendedores
+            listaVendedores.add(vendedor);
+
+            //Se pregunta al usuario si desea ingresar de otro vendedor, de lo contrario finaliza el ciclo
+            System.out.println("Desea ingresar informacion de otro vendedor (si/no): ");
+            String respuesta = scanner.nextLine();
+            bandera = respuesta.equalsIgnoreCase("si");
+
+        }
+
     }
     
-    //Metodo listarVendedores que permite imprimir la informacion de los vededores
+    //Metodo listarVendedores que permite imprimir la informacion de los vendedores
     public static void listarVendedores(List<Vendedor> listaVendedores){
         
         System.out.println("Lista con la informacion de todos los vendedores: ");
@@ -232,30 +249,69 @@ public class ProyectoEntrega_1 {
     //Metodo agregarProducto que permite ingresar la informacion de cada producto
     public static void agregarProducto(List<Producto> listaProductos, Scanner scanner){
         
-        System.out.println("Ingrese la informacion del producto:");
+        //Variable que controla la condicion del while
+        boolean bandera = true;
         
-        //Se pide por consola ingresar el id y se almacena en la variable id
-        System.out.println("Id: ");
-        int id = scanner.nextInt();
-        
-        scanner.nextLine();
-        
-        //Se pide por consola ingresar el nombre del producto y se almacena en la variable nombreProducto
-        System.out.println("Nombre del producto: ");
-        String nombreProducto = scanner.nextLine();
-        
-        //Se pide por consola ingresar el precio de la unidad y se almacena en la variable precioPorUnidad
-        System.out.println("Precio por unidad: ");
-        Double precioPorUnidad = scanner.nextDouble();
-        
-        scanner.nextLine();
-        
-        //Se crea un objeto de tipo producto
-        Producto producto = new Producto(id, nombreProducto, precioPorUnidad);
-        
-        //El objeto creado se agrega a la lista productos
-        listaProductos.add(producto);
-        
+        //Ciclo que controla el ingreso de los productos
+        while(bandera){
+
+            System.out.println("Ingrese la informacion del producto:");
+            
+            //Variable 
+            boolean validador = true;
+            //Variable id que almacenara el ID del producto a ingresar
+            int id = 0;
+            
+            //Ciclo que controla que no se ingrese un id repetido
+            while (validador){
+                
+                //Se pide por consola ingresar el ID y se almacena en la variable id
+                System.out.println("Id: ");
+                id = scanner.nextInt();
+                scanner.nextLine();
+                
+                //Variable para saber si el ID ya existe
+                boolean idRepetido = false;
+                //Ciclo para verificar si ya existe un producto con el mismo numero de ID
+                for (Producto p : listaProductos) {
+                    if (p.getId() == id) {
+                    System.out.println("Error: Ya existe un producto con ese ID.");
+                    idRepetido = true;
+                    break;
+                    }
+                }
+                
+                if (!idRepetido){
+                    
+                    //Sale del ciclo si el ID ingresado no esta repetido en la lista
+                    validador = false;
+                }
+                
+            }
+
+            //Se pide por consola ingresar el nombre del producto y se almacena en la variable nombreProducto
+            System.out.println("Nombre del producto: ");
+            String nombreProducto = scanner.nextLine();
+
+            //Se pide por consola ingresar el precio de la unidad y se almacena en la variable precioPorUnidad
+            System.out.println("Precio por unidad: ");
+            Double precioPorUnidad = scanner.nextDouble();
+
+            scanner.nextLine();
+
+            //Se crea un objeto de tipo producto
+            Producto producto = new Producto(id, nombreProducto, precioPorUnidad);
+
+            //El objeto creado se agrega a la lista productos
+            listaProductos.add(producto);
+
+            //Se pregunta al usuario si desea ingresar de otro producto, de lo contrario finaliza el ciclo
+            System.out.println("Desea ingresar informacion de otro producto (si/no): ");
+            String respuesta = scanner.nextLine();
+            bandera = respuesta.equalsIgnoreCase("si");
+
+        }
+
     }
     
     //Metodo listarProductos que permite imprimir la informacion de los productos
